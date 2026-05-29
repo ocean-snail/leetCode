@@ -11,3 +11,4 @@ function isPalindrome(num: number): boolean {
 
 console.log(isPalindrome(234));
 console.log(isPalindrome(23432));
+console.log(isPalindrome(0));
