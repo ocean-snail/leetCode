@@ -42,3 +42,23 @@ Output: 2, nums = [2,2,_,_]
 Explanation: Your function should return k = 2, with the first two elements of nums being 2.
 It does not matter what you leave beyond the returned k (hence they are underscores).
 */
+
+function removeElement(nums: number[], val: number): number {
+  let count = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] == val) {
+      count++;
+      nums.splice(i, 1);
+      nums.unshift(val);
+    }
+  }
+  nums.reverse();
+  console.log("last nums : " + nums);
+  return nums.length - count;
+}
+
+const inputNums = [3, 2, 2, 3];
+const inputVal = 3;
+const result = removeElement(inputNums, inputVal);
+
+console.log("result : " + result);
