@@ -11,13 +11,29 @@ Explanation: Because numbers[0] + numbers[1] == 9, we return [0, 1].
 1. numbers in input can be negative or 0
 */
 
-function twoSum(nums: number[], target: number): number[] {
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[j] === target - nums[i]) {
-        return [i, j];
-      }
+// function twoSum(nums: number[], target: number): number[] {
+//   for (let i = 0; i < nums.length; i++) {
+//     for (let j = i + 1; j < nums.length; j++) {
+//       if (nums[j] === target - nums[i]) {
+//         return [i, j];
+//       }
+//     }
+//   }
+//   return [];
+// }
+
+function twoSum(numbers: number[], target: number): number[] {
+  const map = new Map();
+
+  for (let i = 0; i < numbers.length; i++) {
+    const current = numbers[i];
+    const complement = target - current;
+
+    if (map.has(complement)) {
+      return [map.get(complement), i];
     }
+
+    map.set(current, i);
   }
   return [];
 }
