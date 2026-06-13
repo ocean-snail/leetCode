@@ -17,42 +17,18 @@ Explanation: [3,0,6,1,5] means the researcher has 5 papers in total and each of 
 Since the researcher has 3 papers with at least 3 citations each and the remaining two with no more than 3 citations each, their h-index is 3.
 
 
-0,1,4,5,6
-자신보다 크거나 같은 수의 갯수가 숫자보다 크거나 같아야 함. -> 최대값
-
 */
 
-// function hIndex(citations: number[]): number {
-//   const n = citations.length;
-//   citations.sort((a, b) => a - b);
-
-//   console.log(`citations : ${citations}`);
-//   for (let i = n - 1; i >= 0; i--) {
-//     if (citations[i] <= n - i) {
-//       return citations[i];
-//     }
-//     console.log(`i : ${i}`);
-//   }
-
-//   return Math.min(n, citations[0]);
-// }
-
+// Time - O(n log n), Space - O(1)
 function hIndex(citations: number[]): number {
-  const n = citations.length;
-  citations.sort((a, b) => a - b);
-  let MaxNumber = Math.min(n, citations[0]); // 1 or 0 또는 길이가 1임
+  let h = 0;
+  citations.sort((a, b) => b - a);
 
-  for (let i = 0; i < n - 1; i++) {
-    MaxNumber = Math.max(MaxNumber, citations[i]);
-    // 2,5,6,7,8
-    // 5,6,7,8
-    if (citations[i] <= n - i) {
-      MaxNumber = citations[i];
-    } else {
-    }
+  while (h < citations.length && citations[h] > h) {
+    h++;
   }
 
-  return 0;
+  return h;
 }
 
 function logResult(citations: number[]) {
@@ -60,11 +36,12 @@ function logResult(citations: number[]) {
   console.log(`result : ${result}`);
 }
 
-// logResult([3, 0, 6, 1, 5]); //3
+// logResult([0, 1, 3, 5, 6]); //3
 // logResult([3]); //1
 // logResult([1]); //1
-logResult([0, 0, 3]); //1
-logResult([0, 0, 0]); //0
+logResult([0, 0, 0, 3]); //1
+// logResult([0, 0, 0]); //0
 // logResult([100]); //1
-// logResult([7, 8, 5, 2, 6]); //4
-// 개수와 숫자 중 최솟값
+// logResult([4, 100]); //2
+// logResult([2, 5, 6, 7, 8]); //4
+// logResult([2, 3, 6, 7, 8]); //3
