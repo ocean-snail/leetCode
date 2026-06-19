@@ -1,6 +1,6 @@
-DataStructures/*.exe
-DataStructures/*.ilk
-DataStructures/*.obj
-DataStructures/*.pdb
+DataStructures/**/*.exe
+DataStructures/**/*.ilk
+DataStructures/**/*.obj
+DataStructures/**/*.pdb
 
 .vscode/tasks.json
