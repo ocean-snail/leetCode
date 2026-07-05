@@ -1,9 +1,12 @@
 public class FixedSlidingWindowExample {
 
+    // * Find the maximum sum of any subArray of size k.
+    // * Time - O(n) | Space - O(1)
     public static int maxSumSubArrayOfSizeK(int[] nums, int k) {
         int windowSum = 0;
         int maxSum = Integer.MIN_VALUE;
 
+        // * Time - O(n)
         for (int right = 0; right < nums.length; right++) {
             windowSum += nums[right];
 
@@ -23,4 +26,5 @@ public class FixedSlidingWindowExample {
 
         System.out.println(maxSumSubArrayOfSizeK(nums, 3)); // 9
     }
+
 }
