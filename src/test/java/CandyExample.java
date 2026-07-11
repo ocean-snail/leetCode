@@ -8,14 +8,14 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CandyTest {
+class CandyExample {
     static class Solution {
         public int candy(int[] ratings) {
             int n = ratings.length;
             int[] candies = new int[n];
             Arrays.fill(candies, 1); // rule 1: everyone gets at least 1
 
-            // Pass 1 (left → right): if I'm rated higher than my LEFT neighbour,
+            // Pass 1 (left → right): if I'm rated higher than my LEFT neighbor,
             // I must have more candy than them.
             for (int i = 1; i < n; i++) {
                 if (ratings[i] > ratings[i - 1]) {
@@ -23,7 +23,7 @@ class CandyTest {
                 }
             }
 
-            // Pass 2 (right → left): if I'm rated higher than my RIGHT neighbour,
+            // Pass 2 (right → left): if I'm rated higher than my RIGHT neighbor,
             // I must have more candy than them. max() keeps pass-1 result valid.
             int total = candies[n - 1];
             for (int i = n - 2; i >= 0; i--) {
@@ -47,7 +47,7 @@ class CandyTest {
     static Stream<Arguments> cases() {
         return Stream.of(
                 Arguments.of(new int[] { 1, 0, 2 }, 5), // example 1: valley shape
-                Arguments.of(new int[] { 1, 2, 2 }, 4), // example 2: equal neighbours
+                Arguments.of(new int[] { 1, 2, 2 }, 4), // example 2: equal neighbors
                 Arguments.of(new int[] { 5 }, 1), // single child
                 Arguments.of(new int[] { 1, 2 }, 3), // strictly increasing
                 Arguments.of(new int[] { 5, 4, 3, 2, 1 }, 15), // strictly decreasing: 5+4+3+2+1
