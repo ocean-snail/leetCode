@@ -5,4 +5,5 @@ DataStructures/**/*.pdb
 DataStructures/**/*.class
 
 .vscode/tasks.json
-target/test-classes/*.class
+target/**/*.class
+
