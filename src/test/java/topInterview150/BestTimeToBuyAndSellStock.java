@@ -38,6 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BestTimeToBuyAndSellStock {
 
+    // Time: O(n), Space: O(1)
     public int maxProfit(int[] prices) {
         int minPrice = prices[0];
         int maxProfit = 0;
