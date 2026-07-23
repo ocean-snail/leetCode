@@ -65,7 +65,9 @@ import org.junit.jupiter.api.Test;
 
 public class InsertDeleteGetRandomO1 {
 
-    // ---------------------------------------------------------------- solution
+    // ------------------------------------------------------------------
+    // Solution
+    // ------------------------------------------------------------------
 
     static final class RandomizedSet {
         private final Map<Integer, Integer> indexByVal;
@@ -114,7 +116,9 @@ public class InsertDeleteGetRandomO1 {
         }
     }
 
-    // ------------------------------------------------------------------- tests
+    // ------------------------------------------------------------------
+    // Tests
+    // ------------------------------------------------------------------
 
     @Test
     @DisplayName("LeetCode example sequence produces the documented outputs")
