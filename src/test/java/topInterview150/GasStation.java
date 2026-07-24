@@ -1,0 +1,147 @@
+package topInterview150;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * There are n gas stations along a circular route, where the amount of gas at
+ * the ith station is gas[i].
+ * 
+ * You have a car with an unlimited gas tank and it costs cost[i] of gas to
+ * travel from the ith station to its next (i + 1)th station. You begin the
+ * journey with an empty tank at one of the gas stations.
+ * 
+ * Given two integer arrays gas and cost, return the starting gas station's
+ * index if you can travel around the circuit once in the clockwise direction,
+ * otherwise return -1. If there exists a solution, it is guaranteed to be
+ * unique.
+ * 
+ * 
+ * ? Example 1:
+ * 
+ * Input: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+ * Output: 3
+ * Explanation:
+ * Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 +
+ * 4 = 4
+ * Travel to station 4. Your tank = 4 - 1 + 5 = 8
+ * Travel to station 0. Your tank = 8 - 2 + 1 = 7
+ * Travel to station 1. Your tank = 7 - 3 + 2 = 6
+ * Travel to station 2. Your tank = 6 - 4 + 3 = 5
+ * Travel to station 3. The cost is 5. Your gas is just enough to travel back to
+ * station 3.
+ * Therefore, return 3 as the starting index.
+ * 
+ * ? Example 2:
+ * 
+ * Input: gas = [2,3,4], cost = [3,4,3]
+ * Output: -1
+ * Explanation:
+ * You can't start at station 0 or 1, as there is not enough gas to travel to
+ * the next station.
+ * Let's start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 =
+ * 4
+ * Travel to station 0. Your tank = 4 - 3 + 2 = 3
+ * Travel to station 1. Your tank = 3 - 3 + 3 = 3
+ * You cannot travel back to station 2, as it requires 4 unit of gas but you
+ * only have 3.
+ * Therefore, you can't travel around the circuit once no matter where you
+ * start.
+ * 
+ * 
+ * ! Constraints:
+ * 
+ * n == gas.length == cost.length
+ * 1 <= n <= 105
+ * 0 <= gas[i], cost[i] <= 104
+ * The input is generated such that the answer is unique.
+ */
+
+public class GasStation {
+    // ------------------------------------------------------------------
+    // Solution
+    // ------------------------------------------------------------------
+
+    /**
+     * * Time: O(n) - single traversal, each index visited once.
+     * * Space: O(1) - three int accumulators, no auxiliary structures.
+     *
+     * @param gas  gas available at each station
+     * @param cost gas needed to move from station i to i+1
+     * @return valid starting index, or -1 if the circuit is impossible
+     */
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int total = 0;
+        int tank = 0;
+        int start = 0;
+
+        for (int i = 0; i < gas.length; i++) {
+            int diff = gas[i] - cost[i];
+            total += diff;
+            tank += diff;
+
+            if (tank < 0) {
+                start = i + 1;
+                tank = 0;
+            }
+        }
+
+        return total < 0 ? -1 : start;
+    }
+
+    // ------------------------------------------------------------------
+    // Tests
+    // ------------------------------------------------------------------
+
+    @Test
+    @DisplayName("Example 1: answer in the middle of the array")
+    void example1() {
+        assertEquals(3,
+                canCompleteCircuit(new int[] { 1, 2, 3, 4, 5 }, new int[] { 3, 4, 5, 1, 2 }));
+    }
+
+    @Test
+    @DisplayName("Example 2: total gas < total cost -> -1")
+    void example2() {
+        assertEquals(-1,
+                canCompleteCircuit(new int[] { 2, 3, 4 }, new int[] { 3, 4, 3 }));
+    }
+
+    @Test
+    @DisplayName("n == 1, gas >= cost -> index 0")
+    void singleStationFeasible() {
+        assertEquals(0, canCompleteCircuit(new int[] { 5 }, new int[] { 4 }));
+    }
+
+    @Test
+    @DisplayName("n == 1, gas < cost -> -1")
+    void singleStationInfeasible() {
+        assertEquals(-1, canCompleteCircuit(new int[] { 3 }, new int[] { 4 }));
+    }
+
+    @Test
+    @DisplayName("All zeros: total == 0, start at index 0")
+    void allZeros() {
+        assertEquals(0, canCompleteCircuit(new int[] { 0, 0, 0 }, new int[] { 0, 0, 0 }));
+    }
+
+    @Test
+    @DisplayName("Answer is the last index (reset happens on the final step)")
+    void answerAtLastIndex() {
+        assertEquals(3, canCompleteCircuit(new int[] { 1, 1, 1, 5 }, new int[] { 2, 2, 2, 1 }));
+    }
+
+    @Test
+    @DisplayName("Total is exactly zero -> a solution must exist")
+    void totalExactlyZero() {
+        assertEquals(2, canCompleteCircuit(new int[] { 3, 1, 4 }, new int[] { 4, 3, 1 }));
+    }
+
+    @Test
+    @DisplayName("Already valid at index 0, no reset ever fires")
+    void startAtZeroNoReset() {
+        assertEquals(0, canCompleteCircuit(new int[] { 4, 5, 6 }, new int[] { 1, 2, 3 }));
+    }
+}
