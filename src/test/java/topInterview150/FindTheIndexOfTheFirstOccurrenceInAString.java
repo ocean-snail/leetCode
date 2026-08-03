@@ -116,18 +116,6 @@ public class FindTheIndexOfTheFirstOccurrenceInAString {
     // Tests
     // ------------------------------------------------------------------
 
-    /*
-     * Convention: the tests call the solution methods directly, with no prefix, and
-     * this
-     * class holds NO field of its own type. A field such as `private final
-     * FindTheIndexOfTheFirstOccurrenceInAString solution = new
-     * FindTheIndexOfTheFirstOccurrenceInAString();` would make every construction
-     * of this
-     * class construct another copy of itself forever, throwing StackOverflowError
-     * before any
-     * test runs.
-     */
-
     @Test
     @DisplayName("Example 1: two occurrences, the earlier index is returned")
     void example1_returnsFirstOfTwoOccurrences() {
