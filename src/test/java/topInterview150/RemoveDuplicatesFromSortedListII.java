@@ -44,9 +44,6 @@ public class RemoveDuplicatesFromSortedListII {
     // Solution
     // ------------------------------------------------------------------
 
-    /**
-     * Singly linked list node, matching the LeetCode definition.
-     */
     public static final class ListNode {
         int val;
         ListNode next;
